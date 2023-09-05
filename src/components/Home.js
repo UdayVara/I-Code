@@ -117,21 +117,25 @@ func main() {
     }
 
     const runCode = async (e) => {
+        console.log(file);
         setProgress(10)
         setProgress(40)
         // Default options are marked with *
         const response = await fetch("https://api.codex.jaagrav.in", {
-            method: "POST", // *GET, POST, PUT, DELETE, etc.
+            method: "POST",
+             // *GET, POST, PUT, DELETE, etc.
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": 'application/json',
+                
             },
             body: JSON.stringify({
                 code: file.value,
                 language: file.ext,
-            }), // body data type must match "Content-Type" header
+            }) // body data type must match "Content-Type" header
         });
         setProgress(70)
         const result = await response.json();
+        console.log(result);
         setProgress(90)
         document.getElementById("output").value = result.output == "" ? result.error : result.output;
         setProgress(100)
@@ -163,7 +167,7 @@ func main() {
                         <option value="cs">C#</option>
                         <option value="go">GoLang</option>
                     </select>
-                    <button className="btn btn-primary px-md-2 px-0 py-0" onClick={runCode} style={{ minWidth: "100px" }}>Run<svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" fill="currentColor" class="bi bi-play-circle ms-2 mb-1" viewBox="0 0 16 16">
+                    <button className="btn btn-primary px-md-2 px-0 py-0" onClick={runCode} style={{ minWidth: "100px" }}>Run<svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" fill="currentColor" className="bi bi-play-circle ms-2 mb-1" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                         <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z" />
                     </svg></button>
